@@ -71,4 +71,15 @@ MongoClient.connect(url, function(err, db) {
   });
 })
 
-// return name only 
+// return name only
+
+// The limit() method takes one parameter, a number defining how many documents to return.
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db("mydb");
+  dbo.collection("customers").find().limit(5).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+});
